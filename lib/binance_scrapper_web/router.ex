@@ -9,6 +9,7 @@ defmodule BinanceScrapperWeb.Router do
     pipe_through :api
 
     get "/check", HistoryController, :check
+    get "/checkv", HistoryController, :checkVolume
 
   end
 end
