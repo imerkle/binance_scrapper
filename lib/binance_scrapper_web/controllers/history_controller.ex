@@ -33,11 +33,17 @@ defmodule BinanceScrapperWeb.HistoryController do
         {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
         {ap, _} = Float.parse(x["price"])
 
+        bv = Enum.at(prices_before,i)["volume"]
+        av = x["volume"]        
+
         %{
           "symbol"=> x["symbol"],
           "price"=>ap,
           "before_price"=> bp,
-          "change"=> (ap - bp) / bp  * 100
+          "change"=> (ap - bp) / bp  * 100,
+          "_volume"=>av,
+          "_before_volume"=> bv,
+          "_change_v"=> (av - bv) / bv  * 100
         }
       end)
       |> Enum.filter(fn x ->  String.contains? x["symbol"], tickers end)
@@ -46,7 +52,7 @@ defmodule BinanceScrapperWeb.HistoryController do
       json(conn, with_changes)
     end
     
-  	def checkVolume(conn, %{"min" => minutes,"ticker" => ticker}) do
+    def checkVolume(conn, %{"min" => minutes,"ticker" => ticker}) do
   		
       tickers = String.split(ticker, ",")
 
@@ -65,26 +71,31 @@ defmodule BinanceScrapperWeb.HistoryController do
       |> limit(1)
       |>  BinanceScrapper.Repo.all
       
-      volume_before = Poison.decode!(Enum.at(history, 0).volume)
-      volume_after = Poison.decode!(Enum.at(present, 0).volume)
-      ivolume_after = Enum.with_index(volume_after)
+      prices_before = Poison.decode!(Enum.at(history, 0).prices)
+      prices_after = Poison.decode!(Enum.at(present, 0).prices)
+      iprices_after = Enum.with_index(prices_after)
 
       with_changes = 
-      Enum.map(volume_after, fn{x, i} -> 
-        {bv, _} = Float.parse(Enum.at(volume_before,i)["volume"])
-        {av, _} = Float.parse(x["volume"])
+      Enum.map(iprices_after, fn{x, i} -> 
+        bv = Enum.at(prices_before,i)["volume"]
+        av = x["volume"]
+        {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
+        {ap, _} = Float.parse(x["price"])        
 
         %{
           "symbol"=> x["symbol"],
-          "volume"=>av,
+          "rvolume"=>av,
           "before_volume"=> bv,
-          "change"=> (av - bv) / bv  * 100
+          "change_v"=> (av - bv) / bv  * 100,
+          "_price"=>ap,
+          "_before_price"=> bp,
+          "_change"=> (ap - bp) / bp  * 100
         }
       end)
       |> Enum.filter(fn x ->  String.contains? x["symbol"], tickers end)
-      |> Enum.sort_by(fn(x) -> -x["change"] end)
+      |> Enum.sort_by(fn(x) -> -x["change_v"] end)
 
       json(conn, with_changes)
-  	end    
+    end       
 
 end
