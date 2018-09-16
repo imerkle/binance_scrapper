@@ -16,7 +16,7 @@ defmodule BinanceScrapper.PurgeIt do
 
   def handle_info(:work, state) do
     
-    minutes = 2880 #2 days
+    minutes = 2880*2 #2*2 days
     now = DateTime.utc_now |> DateTime.to_unix()
       
     timestamp = DateTime.from_unix!(now - minutes * 60)  |> DateTime.to_naive
