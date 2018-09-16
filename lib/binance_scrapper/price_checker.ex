@@ -14,17 +14,22 @@ defmodule BinanceScrapper.PriceChecker do
     end
   
     def handle_info(:work, state) do
-      
-      minutes = 2880*2 
-      now = DateTime.utc_now |> DateTime.to_unix()
+
+      coins = BinanceScrapper.check(%{"min" => 5,"ticker" => "BTC"})
+
+      for x <- coins do
+        if x.change > 4 do
+            msg = 
+            """
+                #{x.symbol}
+                **Price:** #{x.price}
+                **Before Price:** #{x.before_price}
+                **Change:** #{x.before_price}%
+                **Volume:** #{x._volume}
+            """
+        end
+      end
         
-      timestamp = DateTime.from_unix!(now - minutes * 60)  |> DateTime.to_naive
-  
-  
-      BinanceScrapper.History
-      |> where([u], u.inserted_at < ^timestamp)
-      |> BinanceScrapper.Repo.delete_all
-  
       schedule_work() # Reschedule once more
       {:noreply, state}
     end
