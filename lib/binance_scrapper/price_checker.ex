@@ -1,7 +1,6 @@
 defmodule BinanceScrapper.PriceChecker do
     use GenServer
-    import Ecto.Query, warn: false
-  
+
     alias BinanceScrapper.History
   
     def start_link do
@@ -15,18 +14,20 @@ defmodule BinanceScrapper.PriceChecker do
   
     def handle_info(:work, state) do
 
-      coins = BinanceScrapper.check(%{"min" => 5,"ticker" => "BTC"})
-
+      coins = BinanceScrapper.check(%{"min" => "6","ticker" => "BTC"})
+      IO.inspect coins
       for x <- coins do
-        if x.change > 4 do
+        if x["change"] > 4 do
+          
             msg = 
             """
-                #{x.symbol}
-                **Price:** #{x.price}
-                **Before Price:** #{x.before_price}
-                **Change:** #{x.before_price}%
-                **Volume:** #{x._volume}
+                **#{x["symbol"]}**
+                **Price:** #{x["price"]}
+                **Before Price:** #{x["before_price"]}
+                **Change:** #{x["before_price"]}%
+                **Volume:** #{x["_volume"]}
             """
+            Nostrum.Api.create_message!(297409922738421760, msg)
         end
       end
         
@@ -35,6 +36,6 @@ defmodule BinanceScrapper.PriceChecker do
     end
   
     defp schedule_work() do
-      Process.send_after(self(), :work, 24 * 60 * 60 * 1000) # Run every day 24 * 60 * 60 * 1000
+      Process.send_after(self(), :work, 1 * 1 * 5 * 1000) # Run every day 24 * 60 * 60 * 1000
     end
   end

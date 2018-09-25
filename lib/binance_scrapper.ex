@@ -6,6 +6,8 @@ defmodule BinanceScrapper do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
+  import Ecto.Query, warn: false
+
   def check(%{"min" => minutes,"ticker" => ticker}) do
   		
     tickers = String.split(ticker, ",")
