@@ -23,7 +23,7 @@ defmodule BinanceScrapper.PriceChecker do
                 **#{x["symbol"]}**
                 **Price:** #{x["price"]}
                 **Before Price:** #{x["before_price"]}
-                **Change:** #{x["before_price"]}%
+                **Change:** #{x["change"]}%
                 **Volume:** #{x["_volume"]}
             """
             Nostrum.Api.create_message!(297409922738421760, msg)
