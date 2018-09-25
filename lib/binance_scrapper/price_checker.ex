@@ -28,7 +28,7 @@ defmodule BinanceScrapper.PriceChecker do
                 **Volume:** #{x["_volume"]}
 
             """
-            Nostrum.Api.create_message!(297409922738421760, msg)
+            Nostrum.Api.create_message(297409922738421760, msg)
         end
       end
         
