@@ -15,7 +15,6 @@ defmodule BinanceScrapper.PriceChecker do
     def handle_info(:work, state) do
 
       coins = BinanceScrapper.check(%{"min" => "6","ticker" => "BTC"})
-      IO.inspect coins
       for x <- coins do
         if x["change"] > 4 do
           
