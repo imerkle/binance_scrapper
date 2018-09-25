@@ -16,11 +16,11 @@ defmodule BinanceScrapper.PriceChecker do
 
       coins = BinanceScrapper.check(%{"min" => "6","ticker" => "BTC"})
       for x <- coins do
-        if x["change"] > 4 do
+        if x["change"] > 3.7 do
           
             msg = 
             """
-              ***************************************
+              *
 
                 **#{x["symbol"]}**
                 **Price:** #{x["price"]}
@@ -28,7 +28,7 @@ defmodule BinanceScrapper.PriceChecker do
                 **Change:** #{x["change"]}%
                 **Volume:** #{x["_volume"]}
 
-              ***************************************
+              *
             """
             Nostrum.Api.create_message!(297409922738421760, msg)
         end
