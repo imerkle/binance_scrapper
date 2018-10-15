@@ -16,7 +16,7 @@ defmodule BinanceScrapper.PriceChecker do
 
       coins = BinanceScrapper.check(%{"min" => "6","ticker" => "BTC"})
       for x <- coins do
-        if x["change"] > 2.5 && x["symbol"]!="NPXSBTC" && x["symbol"]!="HOTBTC" do
+        if x["change"] > 2.5 && x["symbol"]!="NPXSBTC" && x["symbol"]!="HOTBTC" && x["symbol"]!="DENTBTC"  do
           
             msg = 
             """
