@@ -35,10 +35,11 @@ defmodule BinanceScrapper do
     Enum.map(iprices_after, fn{x, i} -> 
       {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
       {ap, _} = Float.parse(x["price"])
+      
 
       bv = Enum.at(prices_before,i)["volume"]
-      av = x["volume"]        
-
+      av = x["volume"]
+      bv = if bv == 0 do 1 else bv end
       %{
         "symbol"=> x["symbol"],
         "price"=>ap,
@@ -83,7 +84,7 @@ defmodule BinanceScrapper do
       av = x["volume"]
       {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
       {ap, _} = Float.parse(x["price"])        
-
+      bv = if bv == 0 do 1 else bv end
       %{
         "symbol"=> x["symbol"],
         "rvolume"=>av,
