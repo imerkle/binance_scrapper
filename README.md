@@ -1,4 +1,4 @@
-# BinanceScrapper
+# BinanceScrapper 
 
 Basically binance has only 24h hour change. It calls binance api every 10 seconds and stores and with 
 
