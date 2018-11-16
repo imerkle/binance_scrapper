@@ -28,7 +28,7 @@ defmodule BinanceScrapper do
     |>  BinanceScrapper.Repo.all
     
     if prices_before == nil or present == nil do
-     with_changes = []  
+     []  
     else
       prices_before = Poison.decode!(Enum.at(history, 0).prices)
       prices_after = Poison.decode!(Enum.at(present, 0).prices)
@@ -55,8 +55,8 @@ defmodule BinanceScrapper do
       end)
       |> Enum.filter(fn x ->  String.contains? x["symbol"], tickers end)
       |> Enum.sort_by(fn(x) -> -x["change"] end)
+      with_changes
     end
-    with_changes
   end
   def checkVolume( %{"min" => minutes,"ticker" => ticker}) do
   		
@@ -78,7 +78,7 @@ defmodule BinanceScrapper do
     |>  BinanceScrapper.Repo.all
     
     if prices_before == nil or present == nil do
-     with_changes = []  
+     []  
     else    
       prices_before = Poison.decode!(Enum.at(history, 0).prices)
       prices_after = Poison.decode!(Enum.at(present, 0).prices)
@@ -103,7 +103,7 @@ defmodule BinanceScrapper do
       end)
       |> Enum.filter(fn x ->  String.contains? x["symbol"], tickers end)
       |> Enum.sort_by(fn(x) -> -x["change_v"] end)
+      with_changes
     end
-    with_changes
   end 
 end
