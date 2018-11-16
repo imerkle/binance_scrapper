@@ -27,32 +27,35 @@ defmodule BinanceScrapper do
     |> limit(1)
     |>  BinanceScrapper.Repo.all
     
-    prices_before = Poison.decode!(Enum.at(history, 0).prices)
-    prices_after = Poison.decode!(Enum.at(present, 0).prices)
-    iprices_after = Enum.with_index(prices_after)
+    if prices_before == nil or present == nil do
+     with_changes = []  
+    else
+      prices_before = Poison.decode!(Enum.at(history, 0).prices)
+      prices_after = Poison.decode!(Enum.at(present, 0).prices)
+      iprices_after = Enum.with_index(prices_after)
 
-    with_changes = 
-    Enum.map(iprices_after, fn{x, i} -> 
-      {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
-      {ap, _} = Float.parse(x["price"])
-      
+      with_changes = 
+      Enum.map(iprices_after, fn{x, i} -> 
+        {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
+        {ap, _} = Float.parse(x["price"])
+        
 
-      bv = Enum.at(prices_before,i)["volume"]
-      av = x["volume"]
-      bv = if bv == 0 do 1 else bv end
-      %{
-        "symbol"=> x["symbol"],
-        "price"=>ap,
-        "before_price"=> bp,
-        "change"=> (ap - bp) / bp  * 100,
-        "_volume"=>av,
-        "_before_volume"=> bv,
-        "_change_v"=> (av - bv) / bv  * 100
-      }
-    end)
-    |> Enum.filter(fn x ->  String.contains? x["symbol"], tickers end)
-    |> Enum.sort_by(fn(x) -> -x["change"] end)
-
+        bv = Enum.at(prices_before,i)["volume"]
+        av = x["volume"]
+        bv = if bv == 0 do 1 else bv end
+        %{
+          "symbol"=> x["symbol"],
+          "price"=>ap,
+          "before_price"=> bp,
+          "change"=> (ap - bp) / bp  * 100,
+          "_volume"=>av,
+          "_before_volume"=> bv,
+          "_change_v"=> (av - bv) / bv  * 100
+        }
+      end)
+      |> Enum.filter(fn x ->  String.contains? x["symbol"], tickers end)
+      |> Enum.sort_by(fn(x) -> -x["change"] end)
+    end
     with_changes
   end
   def checkVolume( %{"min" => minutes,"ticker" => ticker}) do
@@ -74,30 +77,33 @@ defmodule BinanceScrapper do
     |> limit(1)
     |>  BinanceScrapper.Repo.all
     
-    prices_before = Poison.decode!(Enum.at(history, 0).prices)
-    prices_after = Poison.decode!(Enum.at(present, 0).prices)
-    iprices_after = Enum.with_index(prices_after)
+    if prices_before == nil or present == nil do
+     with_changes = []  
+    else    
+      prices_before = Poison.decode!(Enum.at(history, 0).prices)
+      prices_after = Poison.decode!(Enum.at(present, 0).prices)
+      iprices_after = Enum.with_index(prices_after)
 
-    with_changes = 
-    Enum.map(iprices_after, fn{x, i} -> 
-      bv = Enum.at(prices_before,i)["volume"]
-      av = x["volume"]
-      {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
-      {ap, _} = Float.parse(x["price"])        
-      bv = if bv == 0 do 1 else bv end
-      %{
-        "symbol"=> x["symbol"],
-        "rvolume"=>av,
-        "before_volume"=> bv,
-        "change_v"=> (av - bv) / bv  * 100,
-        "_price"=>ap,
-        "_before_price"=> bp,
-        "_change"=> (ap - bp) / bp  * 100
-      }
-    end)
-    |> Enum.filter(fn x ->  String.contains? x["symbol"], tickers end)
-    |> Enum.sort_by(fn(x) -> -x["change_v"] end)
-
+      with_changes = 
+      Enum.map(iprices_after, fn{x, i} -> 
+        bv = Enum.at(prices_before,i)["volume"]
+        av = x["volume"]
+        {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
+        {ap, _} = Float.parse(x["price"])        
+        bv = if bv == 0 do 1 else bv end
+        %{
+          "symbol"=> x["symbol"],
+          "rvolume"=>av,
+          "before_volume"=> bv,
+          "change_v"=> (av - bv) / bv  * 100,
+          "_price"=>ap,
+          "_before_price"=> bp,
+          "_change"=> (ap - bp) / bp  * 100
+        }
+      end)
+      |> Enum.filter(fn x ->  String.contains? x["symbol"], tickers end)
+      |> Enum.sort_by(fn(x) -> -x["change_v"] end)
+    end
     with_changes
   end 
 end
