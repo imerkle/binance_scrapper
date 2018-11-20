@@ -27,7 +27,7 @@ defmodule BinanceScrapper do
     |> limit(1)
     |>  BinanceScrapper.Repo.all
     
-    if history == nil or present == nil do
+    if history == nil or present == nil or Enum.at(history, 0) == nil or Enum.at(present, 0) == nil do
      []  
     else
       prices_before = Poison.decode!(Enum.at(history, 0).prices)
@@ -77,7 +77,7 @@ defmodule BinanceScrapper do
     |> limit(1)
     |>  BinanceScrapper.Repo.all
     
-    if history == nil or present == nil do
+    if history == nil or present == nil or Enum.at(history, 0) == nil or Enum.at(present, 0) == nil or  do
      []  
     else    
       prices_before = Poison.decode!(Enum.at(history, 0).prices)
