@@ -16,6 +16,7 @@ defmodule BinanceScrapper.Application do
       worker(BinanceScrapper.ScrapIt, []),
       worker(BinanceScrapper.PurgeIt, []),
       worker(BinanceScrapper.PriceChecker, []),
+      #worker(BinanceScrapper.Websock, ["wss://stream.binance.com:9443/stream?streams=bnbbtc@kline_5m", ""]),
       # Start your own worker by calling: BinanceScrapper.Worker.start_link(arg1, arg2, arg3)
       # worker(BinanceScrapper.Worker, [arg1, arg2, arg3]),
     ]

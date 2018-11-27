@@ -29,9 +29,9 @@ config :binance,
   api_key: "avYjd9GSrZ43Efum8Yf1fVgi7GSvPJBDiJjXX1wcbhW3hOeOUxnscqt2wJVHO8NX",
   secret_key: "TUlAz3pACGQdChzPKK7EMdiMYphrVMw444Q317CDXd6J6mAFmqAr0Rh85WBrtL6W"
 
-config :nostrum,
-  token: "NDg3NjI3NjQ2NDk1MDk2ODM0.DovdBQ.ZNZlbm65Kmu_7JZFkH_v7yJ9DOg", # The token of your bot as a string
-  num_shards: :auto # The number of shards you want to run your bot under, or :auto.
+#config :nostrum,
+  #token: "NDg3NjI3NjQ2NDk1MDk2ODM0.DovdBQ.ZNZlbm65Kmu_7JZFkH_v7yJ9DOg", # The token of your bot as a string
+  #num_shards: :auto # The number of shards you want to run your bot under, or :auto.
 
 config :nadia,
   token: "782434163:AAEDBNC-nxsRnkhosq4Cvt0kPZCnSR8mp8A"
