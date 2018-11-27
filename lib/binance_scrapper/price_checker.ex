@@ -28,7 +28,9 @@ defmodule BinanceScrapper.PriceChecker do
                 **Volume:** #{x["_volume"]}
 
             """
-            Nostrum.Api.create_message(297409922738421760, msg)
+            #Nostrum.Api.create_message(297409922738421760, msg)
+            # discord sucks no notifications so added telegram
+            Nadia.send_message("-298080197", msg)
         end
       end
         

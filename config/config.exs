@@ -33,4 +33,7 @@ config :nostrum,
   token: "NDg3NjI3NjQ2NDk1MDk2ODM0.DovdBQ.ZNZlbm65Kmu_7JZFkH_v7yJ9DOg", # The token of your bot as a string
   num_shards: :auto # The number of shards you want to run your bot under, or :auto.
 
+config :nadia,
+  token: "782434163:AAEDBNC-nxsRnkhosq4Cvt0kPZCnSR8mp8A"
+
 import_config "#{Mix.env}.exs"

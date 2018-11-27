@@ -76,10 +76,7 @@ defmodule BinanceScrapper do
     |> order_by(desc: :id)
     |> limit(1)
     |>  BinanceScrapper.Repo.all
-    
-    if history == nil or present == nil or Enum.at(history, 0) == nil or Enum.at(present, 0) == nil or  do
-     []  
-    else    
+      
       prices_before = Poison.decode!(Enum.at(history, 0).prices)
       prices_after = Poison.decode!(Enum.at(present, 0).prices)
       iprices_after = Enum.with_index(prices_after)
@@ -105,5 +102,4 @@ defmodule BinanceScrapper do
       |> Enum.sort_by(fn(x) -> -x["change_v"] end)
       with_changes
     end
-  end 
 end
