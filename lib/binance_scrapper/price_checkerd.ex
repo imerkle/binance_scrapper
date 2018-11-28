@@ -33,7 +33,7 @@ defmodule BinanceScrapper.PriceCheckerd do
           true 
         end
 
-        if good && x["change"] < 1 && x["symbol"]!="NPXSBTC" && x["symbol"]!="HOTBTC" && x["symbol"]!="DENTBTC"  do
+        if good && x["change"] < -1 && x["symbol"]!="NPXSBTC" && x["symbol"]!="HOTBTC" && x["symbol"]!="DENTBTC"  do
           msg = 
           """
           
