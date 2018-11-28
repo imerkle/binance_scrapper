@@ -7,7 +7,7 @@ defmodule BinanceScrapper.PriceCheckerd do
     end
   
     def init(state) do
-      :ets.new(:coins, [:set, :protected, :named_table])
+      :ets.new(:coinsx, [:set, :protected, :named_table])
       
       schedule_work() # Schedule work to be performed at some point
       {:ok, state}
@@ -16,7 +16,7 @@ defmodule BinanceScrapper.PriceCheckerd do
     def handle_info(:work, state) do
       coins = BinanceScrapper.check(%{"min" => "6","ticker" => "BTC"})
       for x <- coins do
-        cx = :ets.lookup(:coins, x["symbol"])
+        cx = :ets.lookup(:coinsx, x["symbol"])
         
         good = if cx != [] do
           y = Enum.at(cx, 0)
