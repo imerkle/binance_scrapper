@@ -44,7 +44,7 @@ defmodule BinanceScrapper.PriceCheckerd do
           Volume: #{x["_volume"]}
           
           """
-          :ets.insert(:coins, {x["symbol"], :os.system_time(:millisecond)})
+          :ets.insert(:coinsx, {x["symbol"], :os.system_time(:millisecond)})
             #Nostrum.Api.create_message(297409922738421760, msg)
             # discord sucks no notifications so added telegram
           Nadia.send_message("-281839565", msg)
