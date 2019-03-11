@@ -31,6 +31,6 @@ defmodule BinanceScrapper.PurgeIt do
   end
 
   defp schedule_work() do
-    Process.send_after(self(), :work, 0.8 * 24 * 60 * 60 * 1000) #ms
+    Process.send_after(self(), :work, 3 * 24 * 60 * 60 * 1000) #ms
   end
 end
