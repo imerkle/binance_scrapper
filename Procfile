@@ -1,1 +1,1 @@
-web: mix phx.server
+web: mix ecto.reset && mix ecto.setup && mix phx.server
