@@ -16,10 +16,10 @@ defmodule BinanceScrapper.PurgeIt do
 
   def handle_info(:work, state) do
     
-    minutes = 2880*1 #2*2 days
+    minutes = 60*60*24*2
     now = DateTime.utc_now |> DateTime.to_unix()
       
-    timestamp = DateTime.from_unix!(now - minutes * 60)  |> DateTime.to_naive
+    timestamp = DateTime.from_unix!(now - minutes)  |> DateTime.to_naive
 
 
     BinanceScrapper.History
@@ -31,6 +31,6 @@ defmodule BinanceScrapper.PurgeIt do
   end
 
   defp schedule_work() do
-    Process.send_after(self(), :work, 30 * 60 * 60 * 1000) # Run every day 24 * 60 * 60 * 1000
+    Process.send_after(self(), :work, 0.8 * 24 * 60 * 60 * 1000) #ms
   end
 end
