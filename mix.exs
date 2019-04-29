@@ -42,7 +42,7 @@ defmodule BinanceScrapper.Mixfile do
       {:plug_cowboy, "~> 1.0"},
       {:binance, "~> 0.5.0"},
       #{:nostrum, git: "https://github.com/imerkle/nostrum.git"},
-      {:nadia, "~> 0.4.4"}
+      {:nadia, "~> 0.5.0"}
     ]
   end
 
