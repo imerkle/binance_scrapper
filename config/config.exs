@@ -43,4 +43,12 @@ config :binance_scrapper,
   dump_percent: -1,
   dump_interval: 1 * 1 * 5 * 1000
 
+config :binance_scrapper, BinanceScrapper.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "binance_scrapper",
+  hostname: "localhost",
+  pool_size: 10
+
 import_config "#{Mix.env}.exs"
