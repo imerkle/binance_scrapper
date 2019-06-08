@@ -43,4 +43,5 @@ config :binance_scrapper, BinanceScrapper.Repo,
   password: "postgres",
   database: "binance_scrapper_dev",
   hostname: "localhost",
+  port: "5432",
   pool_size: 10
