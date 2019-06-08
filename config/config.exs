@@ -26,14 +26,21 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 
 config :binance,
-  api_key: "avYjd9GSrZ43Efum8Yf1fVgi7GSvPJBDiJjXX1wcbhW3hOeOUxnscqt2wJVHO8NX",
-  secret_key: "TUlAz3pACGQdChzPKK7EMdiMYphrVMw444Q317CDXd6J6mAFmqAr0Rh85WBrtL6W"
-
-#config :nostrum,
-  #token: "NDg3NjI3NjQ2NDk1MDk2ODM0.DovdBQ.ZNZlbm65Kmu_7JZFkH_v7yJ9DOg", # The token of your bot as a string
-  #num_shards: :auto # The number of shards you want to run your bot under, or :auto.
+  api_key: "4GfCdy8aaJV9uCRASQmKT7i8MErK4E9Gxf7lrUqQ6jvjMedOLVWzE4UTs1EeRgh3",
+  secret_key: "V7RAzL0H7fe7nc07h0rHpVjlswj5PCZWdDBhsMJ8xXy2FcVE8RVeJnwOkHrHnWFN"
 
 config :nadia,
   token: "782434163:AAEDBNC-nxsRnkhosq4Cvt0kPZCnSR8mp8A"
+
+config :binance_scrapper,
+  base: "BTC",
+  ignore: ["NPXSBTC", "HOTBTC", "DENTBTC", "BTTBTC"],
+  time_skip: 420000, #7 minutes
+  pump_time: "6",
+  pump_percent: 2.5,
+  pump_interval: 1 * 1 * 5 * 1000,
+  dump_time: "6",
+  dump_percent: -1,
+  dump_interval: 1 * 1 * 5 * 1000
 
 import_config "#{Mix.env}.exs"

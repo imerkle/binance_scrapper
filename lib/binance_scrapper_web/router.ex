@@ -10,6 +10,7 @@ defmodule BinanceScrapperWeb.Router do
 
     get "/check", HistoryController, :check
     get "/checkv", HistoryController, :checkVolume
+    get "/cleardb", HistoryController, :cleardb
 
   end
 end

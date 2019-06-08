@@ -9,36 +9,36 @@ defmodule BinanceScrapper do
   import Ecto.Query, warn: false
 
   def check(%{"min" => minutes,"ticker" => ticker}) do
-  		
+
     tickers = String.split(ticker, ",")
 
     {minutes, _} = Integer.parse(minutes)
     now = DateTime.utc_now |> DateTime.to_unix()
-    
+
     timestamp = DateTime.from_unix!(now - minutes * 60 )  |> DateTime.to_naive
 
     history = BinanceScrapper.History
     |> where([u], u.inserted_at >= ^timestamp)
     |> limit(1)
     |>  BinanceScrapper.Repo.all
-    
-    present = BinanceScrapper.History 
+
+    present = BinanceScrapper.History
     |> order_by(desc: :id)
     |> limit(1)
     |>  BinanceScrapper.Repo.all
-    
+
     if history == nil or present == nil or Enum.at(history, 0) == nil or Enum.at(present, 0) == nil do
-     []  
+     []
     else
       prices_before = Poison.decode!(Enum.at(history, 0).prices)
       prices_after = Poison.decode!(Enum.at(present, 0).prices)
       iprices_after = Enum.with_index(prices_after)
 
-      with_changes = 
-      Enum.map(iprices_after, fn{x, i} -> 
+      with_changes =
+      Enum.map(iprices_after, fn{x, i} ->
         {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
         {ap, _} = Float.parse(x["price"])
-        
+
 
         bv = Enum.at(prices_before,i)["volume"]
         av = x["volume"]
@@ -59,34 +59,34 @@ defmodule BinanceScrapper do
     end
   end
   def checkVolume( %{"min" => minutes,"ticker" => ticker}) do
-  		
+
     tickers = String.split(ticker, ",")
 
     {minutes, _} = Integer.parse(minutes)
     now = DateTime.utc_now |> DateTime.to_unix()
-    
+
     timestamp = DateTime.from_unix!(now - minutes * 60 )  |> DateTime.to_naive
 
     history = BinanceScrapper.History
     |> where([u], u.inserted_at >= ^timestamp)
     |> limit(1)
     |>  BinanceScrapper.Repo.all
-    
-    present = BinanceScrapper.History 
+
+    present = BinanceScrapper.History
     |> order_by(desc: :id)
     |> limit(1)
     |>  BinanceScrapper.Repo.all
-      
+
       prices_before = Poison.decode!(Enum.at(history, 0).prices)
       prices_after = Poison.decode!(Enum.at(present, 0).prices)
       iprices_after = Enum.with_index(prices_after)
 
-      with_changes = 
-      Enum.map(iprices_after, fn{x, i} -> 
+      with_changes =
+      Enum.map(iprices_after, fn{x, i} ->
         bv = Enum.at(prices_before,i)["volume"]
         av = x["volume"]
         {bp, _} = Float.parse(Enum.at(prices_before,i)["price"])
-        {ap, _} = Float.parse(x["price"])        
+        {ap, _} = Float.parse(x["price"])
         bv = if bv == 0 do 1 else bv end
         %{
           "symbol"=> x["symbol"],

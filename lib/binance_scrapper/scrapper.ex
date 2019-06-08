@@ -15,15 +15,14 @@ defmodule BinanceScrapper.ScrapIt do
   def handle_info(:work, state) do
     {:ok, prices} = Binance.get_all_prices
 
-    p = []
     p = for x <- prices do
       {:ok, tick} = Binance.get_ticker(x.symbol)
       {v,_} = Float.parse(tick.volume)
       {lp,_} = Float.parse(tick.last_price)
       volume = v*lp
-      
+
       %{
-        price: x.price, 
+        price: x.price,
         symbol: x.symbol,
         volume: volume
       }

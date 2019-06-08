@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+  binance_scrapper:
+    image: 'imerkle/binance_scrapper'
+    build: .
+    environment:
+      - MIX_ENV=${MIX_ENV}
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:
+      WAIT_HOSTS: db:5432
+    command: sh -c "/wait && mix ecto.reset && mix phx.server"
+    #/app/run.sh
+    labels:
+      kompose.service.expose: "binance_scrapper.k8"

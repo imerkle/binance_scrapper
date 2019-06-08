@@ -39,8 +39,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :binance_scrapper, BinanceScrapper.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "trader",
-  password: "trader",
+  username: "postgres",
+  password: "postgres",
   database: "binance_scrapper_dev",
   hostname: "localhost",
   pool_size: 10
