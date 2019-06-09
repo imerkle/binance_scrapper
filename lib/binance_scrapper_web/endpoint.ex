@@ -1,7 +1,9 @@
 defmodule BinanceScrapperWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :binance_scrapper
 
-  #socket "/socket", BinanceScrapperWeb.UserSocket
+  socket "/socket", BinanceScrapperWeb.UserSocket,
+    websocket: false,
+    longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #

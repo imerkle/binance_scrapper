@@ -11,7 +11,6 @@ config :logger, level: :warn
 
 # Configure your database
 config :binance_scrapper, BinanceScrapper.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "binance_scrapper_test",

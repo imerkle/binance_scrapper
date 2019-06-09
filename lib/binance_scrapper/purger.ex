@@ -3,8 +3,6 @@ defmodule BinanceScrapper.PurgeIt do
   use GenServer
   import Ecto.Query, warn: false
 
-  alias BinanceScrapper.History
-
   def start_link do
     GenServer.start_link(__MODULE__, %{})
   end
@@ -15,10 +13,10 @@ defmodule BinanceScrapper.PurgeIt do
   end
 
   def handle_info(:work, state) do
-    
+
     minutes = 60*60*24*2
     now = DateTime.utc_now |> DateTime.to_unix()
-      
+
     timestamp = DateTime.from_unix!(now - minutes)  |> DateTime.to_naive
 
 

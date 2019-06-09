@@ -33,16 +33,15 @@ defmodule BinanceScrapper.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.0-rc"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
+      {:phoenix, "~> 1.4.0"},
+      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_ecto, "~> 4.0"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"},
-      {:plug_cowboy, "~> 1.0"},
-      {:binance, "~> 0.5.0"},
-      #{:nostrum, git: "https://github.com/imerkle/nostrum.git"},
-      {:nadia, "~> 0.4.4"}
+      {:plug_cowboy, "~> 2.0"},
+      {:binance, "~> 0.6.0"},
+      {:nadia, "~> 0.5"}
     ]
   end
 

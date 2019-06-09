@@ -1,7 +1,6 @@
 defmodule BinanceScrapper.PriceCheckerd do
     use GenServer
 
-    alias BinanceScrapper.History
     def start_link do
       GenServer.start_link(__MODULE__, %{})
     end

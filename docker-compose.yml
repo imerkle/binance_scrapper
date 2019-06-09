@@ -5,7 +5,7 @@ services:
     ports:
       - "5432:5432"
   binance_scrapper:
-    image: 'imerkle/binance_scrapper'
+    #image: 'imerkle/binance_scrapper'
     build: .
     environment:
       - MIX_ENV=${MIX_ENV}
@@ -16,6 +16,7 @@ services:
     environment:
       WAIT_HOSTS: db:5432
     command: sh -c "/wait && mix ecto.reset && mix phx.server"
+    #command: mix ecto.reset && mix phx.server
     #/app/run.sh
     labels:
       kompose.service.expose: "binance_scrapper.k8"

@@ -1,11 +1,11 @@
 # Elixir + Phoenix
 
-FROM elixir:1.8-alpine
+FROM elixir:1.8.2-alpine
 
 ENV LANG=C.UTF-8
 
 # Install packages
-RUN apk update && apk add --virtual build-dependencies wget git bash curl
+#RUN apk update && apk add --virtual build-dependencies wget git bash curl
 
 
 # Install Phoenix packages

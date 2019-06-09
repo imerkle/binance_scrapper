@@ -11,7 +11,7 @@ defmodule BinanceScrapper.History do
   @required_fields ~w(prices)
   @optional_fields ~w()
 
-  def changeset(history, params \\ :empty) do
+  def changeset(history, params) do
     history
     |> cast(params, @required_fields, @optional_fields)
   end

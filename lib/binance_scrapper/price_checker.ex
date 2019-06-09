@@ -1,7 +1,6 @@
 defmodule BinanceScrapper.PriceChecker do
     use GenServer
 
-    alias BinanceScrapper.History
     def start_link do
       GenServer.start_link(__MODULE__, %{})
     end
@@ -54,7 +53,7 @@ defmodule BinanceScrapper.PriceChecker do
           :ets.insert(:coins, {x["symbol"], :os.system_time(:millisecond)})
             #Nostrum.Api.create_message(297409922738421760, msg)
             # discord sucks no notifications so added telegram
-          Nadia.send_message("-298080197", msg)
+          {:ok, _result} = Nadia.send_message("-298080197", msg)
         end
       end
 
