@@ -70,8 +70,11 @@ config :logger, level: :info
 
 # Configure your database
 config :binance_scrapper, BinanceScrapper.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "binance_scrapper",
-  hostname: "db",
-  pool_size: 10
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
+#  username: "postgres",
+#  password: "postgres",
+#  database: "binance_scrapper",
+#  hostname: "db",
+#  pool_size: 10
