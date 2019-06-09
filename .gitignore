@@ -8,3 +8,16 @@ erl_crash.dump
 *.beam
 #/config/*.secret.exs
 /.elixir_ls
+
+
+#terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+
+crash.log
+
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json

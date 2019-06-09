@@ -67,8 +67,11 @@ config :logger, level: :info
 #import_config "prod.secret.exs"
 
 #import_config "prod.secret.exs"
+
+# Configure your database
 config :binance_scrapper, BinanceScrapper.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl: true
+  username: "postgres",
+  password: "postgres",
+  database: "binance_scrapper",
+  hostname: "db",
+  pool_size: 10
