@@ -3,7 +3,6 @@
 FROM elixir:1.8.2-alpine
 
 ENV LANG=C.UTF-8
-
 # Install packages
 #RUN apk update && apk add --virtual build-dependencies wget git bash curl
 
@@ -23,6 +22,6 @@ ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.0/wait
 RUN chmod +x /wait
 
 #remove this on docker-compose
-RUN mix ecto.setup && mix phx.server
+RUN MIX_ENV=prod mix ecto.setup && MIX_ENV=prod mix phx.server
 
 EXPOSE 4000

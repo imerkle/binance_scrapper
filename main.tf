@@ -7,7 +7,6 @@ resource "heroku_app" "default" {
   region = "us"
   stack = "container"
 }
-
 resource "heroku_addon" "database" {
   app  = "${heroku_app.default.name}"
   plan = "heroku-postgresql:hobby-basic"
