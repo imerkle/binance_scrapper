@@ -3,3 +3,5 @@ build:
     MIX_ENV: prod
   docker:
     web: Dockerfile
+run:
+  web: mix ecto.setup && mix phx.server
