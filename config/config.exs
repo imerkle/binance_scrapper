@@ -34,7 +34,7 @@ config :nadia,
 
 config :binance_scrapper,
   base: "BTC",
-  ignore: ["NPXSBTC", "HOTBTC", "DENTBTC", "BTTBTC"],
+  ignore: ["NPXSBTC", "HOTBTC", "DENTBTC", "BTTBTC", "SCBTC", "NCASHBTC"],
   time_skip: 420000, #7 minutes
   pump_time: "6",
   pump_percent: 2.5,
