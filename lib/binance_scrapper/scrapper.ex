@@ -14,7 +14,7 @@ defmodule BinanceScrapper.ScrapIt do
 
   def handle_info(:work, state) do
     {:ok, prices} = Binance.get_all_prices
-
+    IO.inspect prices
     p = for x <- prices do
       {:ok, tick} = Binance.get_ticker(x.symbol)
       {v,_} = Float.parse(tick.volume)

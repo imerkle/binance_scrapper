@@ -8,12 +8,9 @@ defmodule BinanceScrapper.History do
     timestamps()
   end
 
-  @required_fields ~w(prices)
-  @optional_fields ~w()
-
   def changeset(history, params) do
     history
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, [:prices])
   end
 
 end
