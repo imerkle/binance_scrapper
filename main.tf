@@ -14,8 +14,8 @@ resource "heroku_build" "default" {
   buildpacks = ["https://github.com/HashNuke/heroku-buildpack-elixir"]
 
   source = {
-    url     = "https://github.com/imerkle/binance_scrapper/archive/v0.0.1.tar.gz"
-    version = "v0.0.1"
+    url     = "https://github.com/imerkle/binance_scrapper/archive/master.tar.gz"
+    version = "master"
   }
 }
 
