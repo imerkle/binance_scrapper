@@ -5,7 +5,18 @@ provider "heroku" {
 resource "heroku_app" "default" {
   name   = "binancescrapper"
   region = "us"
-  stack = "container"
+#  stack = "container"
+}
+
+
+resource "heroku_build" "default" {
+  app        = "${heroku_app.default.id}"
+  buildpacks = ["https://github.com/HashNuke/heroku-buildpack-elixir"]
+
+  source = {
+    url     = "https://github.com/imerkle/binance_scrapper/archive/v0.0.1.tar.gz"
+    version = "v0.0.1"
+  }
 }
 
 resource "heroku_addon" "database" {
