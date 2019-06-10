@@ -39,7 +39,7 @@ defmodule BinanceScrapper.PriceCheckerd do
           true
         end
 
-        if good && x["change"] < @dump_percent && Enum.member?(@ignore, x["symbol"]) do
+        if good && x["change"] < @dump_percent && !Enum.member?(@ignore, x["symbol"]) do
           msg =
           """
 
