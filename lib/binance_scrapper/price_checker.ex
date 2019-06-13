@@ -18,6 +18,7 @@ defmodule BinanceScrapper.PriceChecker do
     @pump_percent Application.get_env(:binance_scrapper, :pump_percent)
     @pump_time Application.get_env(:binance_scrapper, :pump_time)
     @pump_interval Application.get_env(:binance_scrapper, :pump_interval)
+    @vol Application.get_env(:binance_scrapper, :vol)
 
     def handle_info(:work, state) do
       coins = BinanceScrapper.check(%{"min" => @pump_time, "ticker" => @base})
