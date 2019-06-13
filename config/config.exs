@@ -34,13 +34,14 @@ config :nadia,
 
 config :binance_scrapper,
   base: "BTC",
-  ignore: ["NPXSBTC", "HOTBTC", "DENTBTC", "BTTBTC", "SCBTC", "NCASHBTC"],
+  ignore: ["NPXSBTC", "HOTBTC", "DENTBTC", "BTTBTC", "SCBTC", "NCASHBTC", "KEYBTC", "MFTBTC"],
   time_skip: 420000, #7 minutes
   pump_time: "6",
   pump_percent: 2.5,
   pump_interval: 1 * 1 * 5 * 1000,
   dump_time: "6",
   dump_percent: -1,
-  dump_interval: 1 * 1 * 5 * 1000
+  dump_interval: 1 * 1 * 5 * 1000,
+  vol: 150
 
 import_config "#{Mix.env}.exs"
